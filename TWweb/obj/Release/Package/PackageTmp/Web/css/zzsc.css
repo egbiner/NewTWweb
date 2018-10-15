@@ -1,0 +1,120 @@
+﻿@charset "utf-8";
+body{
+	margin: 0;
+	padding: 0;
+}
+.exlist {
+	background-color:#fffbd4;
+	margin:10px auto;
+	padding:5px;
+	width:680px;
+	min-height:620px;
+	height:auto;
+	font-family:"微软雅黑";
+	-webkit-box-shadow:4px 4px 5px #333;/*webkit*/
+	-moz-box-shadow:4px 4px 5px #333;/*firefox*/
+	box-shadow:4px 4px 5px #333;/*opera或ie9*/
+}
+#title {
+	width:200px;
+	margin:10px auto;
+}
+#title legend {
+	font-size:26px;
+}
+div.exlist_title {
+	background-color:#fffbd4;
+	width:680px;
+	height:20px;
+}
+div.exlist_title img {
+	float:right;
+	margin:-15px 10px;
+}
+/*-----------form-----------*/
+
+fieldset {
+	width:90%;
+	border:1px dashed #666;
+	margin:40px auto;
+}
+legend {
+	background-color:#fffbd4;
+	height:120px;
+	height:30px;
+	color:#630;
+	font-weight:bolder;
+	font-size:20px;
+	line-height:30px;
+	margin: 0px,0px 10px;
+	padding:0 10px;
+}
+div.row {
+	margin:10px;
+	padding:5px;
+}
+div.row label {
+	height:20px;
+	font-size:16px;
+	line-height:20px;
+	margin:0 10px;
+}
+input.txt {
+	background-color:#fffbd4;
+	color:#333;
+	width:150px;
+	height:20px;
+	margin:0 10px;
+	font-size:16px;
+	line-height:20px;
+	border:none;
+	border-bottom:1px solid #565656;
+}
+input.txt:focus {
+	color:#333;	
+	border-bottom:1px solid #F00;
+}
+
+select {
+	width:100px;
+}
+option {
+	text-align:center;
+}
+input.btn {
+	width:50px;
+	height:20px;
+	color:#000008B;
+	background-color: transparent;
+	border:0;
+	padding:0;
+}
+
+
+.activity-time {
+    float: right;
+    margin-right: 130px;
+
+}
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { float: left; clear:left; padding: 0 0 0 5px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 45%; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; padding: 0 5px 0 0; }
+.ui-timepicker-rtl dl dt{ float: right; clear: right; }
+.ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
+
+.send{
+	width: 50%;
+	height: 38px;	
+	margin:  0px 0px 10px 150px;
+	border-radius: 8px;
+	
+}
+.send:hover{
+	background-color: #F8701E;
+}

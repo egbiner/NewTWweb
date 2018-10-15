@@ -1,0 +1,46 @@
+@CHARSET "UTF-8";
+/*= Reset =*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,p,blockquote,th,td,figure{margin:0;padding:0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+fieldset,img{border:0;}
+ul li{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+h5{font-size:18px;margin-bottom:20px;color:#666;}
+h5 span{font-size:12px;color:#ccc;font-weight:normal;}
+body{font:normal 14px/24px "Helvetica Neue",Helvetica,STheiti,"Microsoft Yahei","冬青黑体简体中文 w3",宋体,Arial,Tahoma,sans-serif,serif;word-wrap:break-word;}
+
+
+
+
+.box { width:100%;float: left;padding-left: 20px;  background-color: #fffbd4;  border-radius: 8px;}
+
+
+.event_list {float: left;background:url('../img/dian3.png') 64px 0 repeat-y;margin:10px 0 20px 0;min-height:680px }
+.event_list h3 { margin:0 0 10px 57px;font-size:24px;font-family:Georgia;color:#FFB51ECC;padding-left:25px;background:url('../img/jian.png') 0 -45px no-repeat;height:38px;line-height:30px;font-style:italic; }
+.event_list li { background:url('../img/jian.png') 136px -80px no-repeat; }
+.event_list li span { width:60px;text-align:right;display:block;float:left;margin-top:10px; }
+.event_list li p { width:290px;margin-left:24px;display:inline-block;padding-left:10px;background:url('../img/jian.png') -21px 0 no-repeat;line-height:25px;_float:left; }
+.event_list li p span { width:260px;text-align:left;border-radius: 5px;border-bottom:2px solid #DDD;padding:10px 15px;background:#FFF;margin:0; }
+
+.titlelist{line-height:24px;color: #8C8C8C;padding-bottom:20px;}
+.titlelist dt { font-weight: bold;color:#666;white-space: nowrap;margin:10px;}
+.titlelist dd {padding-left: 13px;}
+
+.right {
+    min-height: 650px;
+    margin: 25px 25px 0px 0px;
+    background-color: #fffbd4;
+    border-radius: 10px;
+}
+
+.right h3{margin: 10px 0px 10px 31px;font-size:24px;font-family:Georgia;color:#FFB51ECC;padding-left:25px;}
+/*h4 {
+    margin: 10px 0px 10px 31px;
+    font-size: 16px;
+    font-family: Georgia;
+    color: #FFB51ECC;
+    padding-left: 25px;
+}*/
+.right ul{ width: 80%; margin: 25px 30px;}
+.right ul li{width: 100%; height: auto; line-height: 29px; border-bottom: dashed 1px #CCCCCC;}
+.right ul li span{float: right;}

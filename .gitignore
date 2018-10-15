@@ -1,0 +1,15 @@
+
+*.dll
+.vs/TWweb/v14/.suo
+*.dll
+*.pdb
+.vs/config/applicationhost.config
+DAL/obj/Debug/DAL.csproj.FileListAbsolute.txt
+TWweb/obj/Debug/TWweb.csproj.FileListAbsolute.txt
+TWweb/TWweb.csproj
+.vs/config/applicationhost.config
+.vs/config/applicationhost.config
+*.dll
+*.pdb
+*.txt
+*.cache
