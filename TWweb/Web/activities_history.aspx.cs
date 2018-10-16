@@ -1,4 +1,5 @@
-﻿using MyClass;
+﻿using DAL;
+using MyClass;
 using System;
 using System.Data;
 
@@ -7,11 +8,22 @@ namespace TWweb.Web
 {
     public partial class activities_history : System.Web.UI.Page
     {
-        public DataTable dt_ed = null;
+        public Page apply_page = null;
+        public int page = 1;
+        public int count = 10;
+        public int limit = 9;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //获取已过期的活动
-            dt_ed = SqlHelper.ExecuteDataTable("select top(8) * from auditorium where status=1 and use_time_end < GETDATE() order by use_time_end DESC");
+            if (Request["page"] != null)
+            {
+                page = Convert.ToInt32(Request["page"]);
+            }
+            if (Request["limit"] != null)
+            {
+                limit = Convert.ToInt32(Request["limit"]);
+            }
+            apply_page = ApplyForm.GetEd(limit, page);
+            count = ApplyForm.GetEdCount();
         }
     }
 }

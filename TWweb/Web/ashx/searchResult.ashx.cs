@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace TWweb.Web.ashx
 {
@@ -17,7 +18,7 @@ namespace TWweb.Web.ashx
         public string redata = "";
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/html";
+            context.Response.ContentType = "text/plain";
             try
             {
                 int recode = int.Parse(context.Request["recode"]);
@@ -25,7 +26,6 @@ namespace TWweb.Web.ashx
                     new SqlParameter("@id", recode));
 
                 string atag = "<br><a href='javascript:opendetail(" + dt.Rows[0]["id"] + ")'>查看申请表</a>";
-                //string tips = "<p>您好"+ dt.Rows[0]["ap_user"] + "!,您申请的\" "+ dt.Rows[0]["activity"] + " \"已经处理</p>";
                 string tips = "<p>您好！您申请的\" "+ dt.Rows[0]["activity"] + " \"已经处理</p>";
                 if (dt != null)
                     status = Convert.ToInt32(dt.Rows[0]["status"]);
@@ -35,11 +35,28 @@ namespace TWweb.Web.ashx
                     redata = tips+ "<h1 style='text-align:center;color:red;'> 申请失败</h1><p>" + ((DateTime)dt.Rows[0]["handle_time"]).ToString("F") + "</p><p>失败原因:" + dt.Rows[0]["reason"] + "</p>";
                 else
                     redata = "<h1 style='text-align:center;color:blue;'>申请中</h1>";
-                context.Response.Write(redata);
+                //context.Response.Write(redata);
+
+
+                string url = "upload/yanyiting/" + dt.Rows[0]["id"] + "_" + dt.Rows[0]["activity"] + ".docx";
+                string filename = dt.Rows[0]["activity"].ToString();
+                JavaScriptSerializer json = new JavaScriptSerializer();
+                Dictionary<string, object> dictionaty = new Dictionary<string, object>();
+                dictionaty.Add("result", redata);
+                dictionaty.Add("fileName", filename);
+                dictionaty.Add("url", url);
+                string jsonStr = json.Serialize(dictionaty);
+
+                context.Response.Write(jsonStr);
             }
             catch (Exception e)
             {
-                context.Response.Write("<h1 style='text-align:center;'>未找到结果,请尝试重新输入回执码!</h1>");
+                //context.Response.Write("<h1 style='text-align:center;'>未找到结果,请尝试重新输入回执码!</h1>");
+                JavaScriptSerializer json = new JavaScriptSerializer();
+                Dictionary<string, object> dictionaty = new Dictionary<string, object>();
+                dictionaty.Add("result", "<h1 style='text-align:center;'>未找到结果,请尝试重新输入回执码!</h1>");
+                string jsonStr = json.Serialize(dictionaty);
+                context.Response.Write(jsonStr);
             }
         }
 

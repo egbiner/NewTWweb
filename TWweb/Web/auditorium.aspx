@@ -10,50 +10,54 @@
     <title>共青团桂林电子科技大学委员会</title>
     <link href="css/stylenewslist.css" rel="stylesheet" />
     <script src="../Admin/js/jquery-3.0.0.min.js"></script>
-    <script src="js/layer.js"></script>
-    <link href="css/layer.css" rel="stylesheet" />
+    <script src="js/layui/layui.js"></script>
+    <link href="js/layui/css/layui.css" rel="stylesheet" />
     <script>
         $(document).ready(function () {
-            $(".menu a").click(function () {
-                $(".menu a").removeClass("active");
-                $(this).addClass("active");
-                if ($(this).attr('id') == 4) {
-                    document.getElementById("iframe1").src = "apply_search.aspx";
-                }else if ($(this).attr('id') == 3) {
-                    //notice(); 
-                    document.getElementById("iframe1").src = "applyform.aspx";
-                }else if ($(this).attr('id') == 2) {
-                    document.getElementById("iframe1").src = "activities_history.aspx";
-                }else if ($(this).attr('id') == 1)
-                    document.getElementById("iframe1").src = "activities_preview.aspx";
-                else
-                    document.getElementById("iframe1").src = "<%="news_list_iframe.aspx?page_num=" + page_num + "&news_type=31" %>";
+            layui.use('layer', function () {
+                var $ = layui.jquery, layer = layui.layer;
+
+                $(".menu a").click(function () {
+                    $(".menu a").removeClass("active");
+                    $(this).addClass("active");
+                    if ($(this).attr('id') == 4) {
+                        document.getElementById("iframe1").src = "apply_search.aspx";
+                    } else if ($(this).attr('id') == 3) {
+                        //notice();
+                        document.getElementById("iframe1").src = "applyform.aspx";
+                    } else if ($(this).attr('id') == 2) {
+                        document.getElementById("iframe1").src = "activities_history.aspx";
+                    } else if ($(this).attr('id') == 1)
+                        document.getElementById("iframe1").src = "activities_preview.aspx";
+                    else
+                        document.getElementById("iframe1").src = "<%="news_list_iframe.aspx?page_num=" + page_num + "&news_type=31" %>";
+                });
             });
+            //须知弹层
+            function notice() {
+                layer.open({
+                    title: '申请须知',
+                    type: 1,
+                    area: ['700px', '70%'], //宽高
+                    content: '<div style="padding:40px;line-height:36px"><h2 style="text-align:center">大学生活动中心演艺厅使用注意事项</h2><p>1、填报场地申请后经由团委文如冰老师审批后方可使用演艺厅。</p><p>2、非指定演艺厅操作人员禁止进入控制室。</p><p>3、在布置场地过程中严禁使用胶类工具粘贴物品，不得在演艺厅内张贴或悬挂任何装饰品、横幅。</p><p>4、在布置场地时，不得以滑动的方式挪动桌椅，以防划伤地板。 </p><p>5、演艺厅原则上由使用单位自备话筒5号电池，严禁在室内吸烟，吃零食，丢纸屑，随地吐痰，用笔和其他东西刻写公物。</p><p>6、学生或社团组织在使用演艺厅时任何人不得乱动演艺厅电源，如需特殊用电请自行提前向后勤处申请电力维护，以确保用电安全。如需搭台、架灯光，请在审批前填写《搭建舞台架申请模板》。</p><p>7、严禁使用明火，在活动过程中不得使用烟花、蜡烛等易燃易爆物品。</p><p>8、使用组织要爱护演艺厅内的设备，严禁用手拍打话筒，椅子要轻拿轻放。演艺厅内灯光、音响等设备未经同意不得擅自操作和移动</p><p>9、主办方应合理控制活动时间，最多不得超过申请时长的30分钟，如若超过申请时长的30分钟，应在活动结束后重新续写申请表，并交给团委文如冰老师。</p><p>10、当活动结束后，主办方应将演艺厅打扫干净并将桌椅放在指定地点，活动主办方指定负责人应积极配合工作人员清点、检查演艺厅内卫生和设备状况，经演艺厅管理人员许可后方可离开。</p><p>11、演艺厅使用最终解释权归校团委所有，如有损坏，请使用单位照价赔偿。</p><p>12、提前致电了解使用空挡，填表后一式两份交到大学生活动中心406文如冰老师处（存档，0773-2328357）和大学生艺术团团长于梦龙处（安排开门，15078380908）</p><br/><p style="text-align:right">共青团桂林电子科技大学委员会<br/>2018年4月15日</p></div>',
+                    closeBtn: 0,
+                    btn: '我同意(10s)',
+                    btnAlign: 'c',
+                    maxmin: true,
+                });
+                $(".layui-layer-btn0").attr("style", "background-color:grey;");
+                $(".layui-layer-btn0").css("pointer-events", "none");
+                var sec = 10;
+                var interval = window.setInterval(function () {
+                    $(".layui-layer-btn0").text("我同意(" + (sec--) + "s)");
+                    if (sec == -1) {
+                        clearInterval(interval);
+                        $(".layui-layer-btn0").text("我同意");
+                        $(".layui-layer-btn0").removeAttr("style");
+                    }
+                }, 1000);
+            }
         });
-        //须知弹层
-        function notice() {
-            layer.open({
-                title:'申请须知',
-                type: 1,
-                area: ['700px', '70%'], //宽高
-                content: '<div style="padding:40px;line-height:36px"><h2 style="text-align:center">大学生活动中心演艺厅使用注意事项</h2><p>1、填报场地申请后经由团委文如冰老师审批后方可使用演艺厅。</p><p>2、非指定演艺厅操作人员禁止进入控制室。</p><p>3、在布置场地过程中严禁使用胶类工具粘贴物品，不得在演艺厅内张贴或悬挂任何装饰品、横幅。</p><p>4、在布置场地时，不得以滑动的方式挪动桌椅，以防划伤地板。 </p><p>5、演艺厅原则上由使用单位自备话筒5号电池，严禁在室内吸烟，吃零食，丢纸屑，随地吐痰，用笔和其他东西刻写公物。</p><p>6、学生或社团组织在使用演艺厅时任何人不得乱动演艺厅电源，如需特殊用电请自行提前向后勤处申请电力维护，以确保用电安全。如需搭台、架灯光，请在审批前填写《搭建舞台架申请模板》。</p><p>7、严禁使用明火，在活动过程中不得使用烟花、蜡烛等易燃易爆物品。</p><p>8、使用组织要爱护演艺厅内的设备，严禁用手拍打话筒，椅子要轻拿轻放。演艺厅内灯光、音响等设备未经同意不得擅自操作和移动</p><p>9、主办方应合理控制活动时间，最多不得超过申请时长的30分钟，如若超过申请时长的30分钟，应在活动结束后重新续写申请表，并交给团委文如冰老师。</p><p>10、当活动结束后，主办方应将演艺厅打扫干净并将桌椅放在指定地点，活动主办方指定负责人应积极配合工作人员清点、检查演艺厅内卫生和设备状况，经演艺厅管理人员许可后方可离开。</p><p>11、演艺厅使用最终解释权归校团委所有，如有损坏，请使用单位照价赔偿。</p><p>12、提前致电了解使用空挡，填表后一式两份交到大学生活动中心406文如冰老师处（存档，0773-2328357）和大学生艺术团团长于梦龙处（安排开门，15078380908）</p><br/><p style="text-align:right">共青团桂林电子科技大学委员会<br/>2018年4月15日</p></div>',
-                closeBtn: 0,
-                btn:'我同意(10s)',
-                btnAlign: 'c',
-                maxmin: true,
-            });
-            $(".layui-layer-btn0").attr("style","background-color:grey;");
-            $(".layui-layer-btn0").css("pointer-events", "none");
-            var sec = 10;
-             var interval = window.setInterval(function () {
-                 $(".layui-layer-btn0").text("我同意("+(sec--)+"s)");
-                 if(sec == -1){
-                     clearInterval(interval);
-                     $(".layui-layer-btn0").text("我同意");
-                     $(".layui-layer-btn0").removeAttr("style");
-                  }
-            }, 1000);
-        }
     </script>
     <script type="text/javascript" charset="UTF-8" src="js/prefixfree.min.js"></script>
 </head>

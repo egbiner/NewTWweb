@@ -47,7 +47,7 @@ namespace TWweb
             string[] arr = { "use_time_start", "use_time_end", "fz_user","fz_phone","ap_user",
                 "ap_phone","ac_linkman","ac_linkman_phone","main_attend","activity",
                 "participants_num","ap_reason",
-                "device_need","ap_opinion"};
+                "device_need","ap_opinion","leader_opinion"};
 
             string text = para.ParagraphText;
             var runs = para.Runs;
@@ -105,6 +105,27 @@ namespace TWweb
                             case "ap_opinion":
                                 text = text.Replace("$" + arr[j] + "$", dt.Rows[0]["ap_opinion"].ToString());
                                 break;
+                            case "leader_opinion":
+                                {
+                                    string opinion = "";
+                                    if (Convert.ToInt32(dt.Rows[0]["status"]) == 0)
+                                    {
+                                        opinion = "未审核";
+                                    }
+                                    else if (Convert.ToInt32(dt.Rows[0]["status"]) == 1)
+                                    {
+                                        opinion = "审核通过";
+                                    }
+                                    else if (Convert.ToInt32(dt.Rows[0]["status"]) == 2)
+                                    {
+                                        opinion = "审核未通过";
+                                    }
+                                    else
+                                    {
+                                        opinion = "待审核";
+                                    }
+                                    text = text.Replace("$" + arr[j] + "$", opinion);
+                                }; break;
                         }
                     }
                 }

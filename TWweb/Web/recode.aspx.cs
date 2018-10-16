@@ -14,7 +14,7 @@ namespace TWweb.Web
     {
         public string re_code = "";
         public string url = "#";
-        public string filename = "文件";
+        public string filename = "文件下载";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request["recode"] != null)

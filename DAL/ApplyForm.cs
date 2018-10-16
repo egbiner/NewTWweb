@@ -28,6 +28,8 @@ namespace DAL
         public string ap_reason { get; set; }
         public string device_need { get; set; }
         public string ap_opinion { get; set; }
+        public string ac_start_time { get; set; }
+        public string ac_end_time { get; set; }
 
 
         public ApplyForm(int id)
@@ -50,6 +52,8 @@ namespace DAL
             this.fz_user = dt.Rows[0]["fz_user"].ToString();
             this.status = dt.Rows[0]["status"].ToString();
             this.activity = dt.Rows[0]["activity"].ToString();
+            this.ac_start_time = dt.Rows[0]["ac_start_time"].ToString();
+            this.ac_end_time = dt.Rows[0]["ac_end_time"].ToString();
 
             this.use_time_start = DateTime.Parse(dt.Rows[0]["use_time_start"].ToString());
             this.use_time_end = DateTime.Parse(dt.Rows[0]["use_time_end"].ToString());
@@ -72,9 +76,53 @@ namespace DAL
             return new Page(apply_lst, total, page_size, page_number);
         }
 
+        public static Page GetIng(int page_size, int page_number)
+        {
+            DataTable dt = SqlHelper.ExecuteDataTable(page_size, page_number,
+                    "select * from auditorium where status=1 and use_time_end >= GETDATE() order by use_time_start");
+            List<ApplyForm> apply_lst = new List<ApplyForm>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                int id = int.Parse(dt.Rows[i]["id"].ToString());
+                ApplyForm af = new ApplyForm(id);
+                apply_lst.Add(af);
+            }
+            int total = GetIngCount();
+            int total_page = total / page_size + 1;
+            return new Page(apply_lst, total, page_size, page_number);
+        }
+
+        public static Page GetEd(int page_size, int page_number)
+        {
+            DataTable dt = SqlHelper.ExecuteDataTable(page_size, page_number,
+                    "select * from auditorium where status=1 and use_time_end < GETDATE()");
+            List<ApplyForm> apply_lst = new List<ApplyForm>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                int id = int.Parse(dt.Rows[i]["id"].ToString());
+                ApplyForm af = new ApplyForm(id);
+                apply_lst.Add(af);
+            }
+            int total = GetEdCount();
+            int total_page = total / page_size + 1;
+            return new Page(apply_lst, total, page_size, page_number);
+        }
+
         public static int GetNewsCountOfApplyInfo()
         {
             string count = SqlHelper.ExecuteScalar("select count(1) from auditorium").ToString();
+            return int.Parse(count);
+        }
+
+        public static int GetIngCount()
+        {
+            string count = SqlHelper.ExecuteScalar("select count(*) from auditorium where status=1 and use_time_end >= GETDATE()").ToString();
+            return int.Parse(count);
+        }
+
+        public static int GetEdCount()
+        {
+            string count = SqlHelper.ExecuteScalar("select count(*) from auditorium where status=1 and use_time_end < GETDATE()").ToString();
             return int.Parse(count);
         }
     }

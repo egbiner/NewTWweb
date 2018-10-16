@@ -86,7 +86,7 @@
         </ul>
         <aside class="paging">
             <span>跳至第:</span>
-            <input type="number" min="1" max="<%=news_page.total_page %>" value="<%=page_num %>" id="page_number">
+            <input type="number" min="1" max="<%=news_page.total_page %>" value="<%=page_num %>" id="page_number"/>
             <span>页</span>
             <a class="sure_but" onclick="goToPage()">确定</a>
             <span>共 <span id="total_page"><%=news_page.total_page %></span> 页　</span>

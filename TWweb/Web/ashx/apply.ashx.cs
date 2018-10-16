@@ -31,6 +31,8 @@ namespace TWweb.Web.ashx
         string date;
         string star_time;
         string end_time;
+        string ac_start_time;
+        string ac_end_time;
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/html";
@@ -38,8 +40,8 @@ namespace TWweb.Web.ashx
             {
                 date = context.Request["date"];
                 day = date;
-                star_time = context.Request["start_time"];
-                end_time = context.Request["end_time"];
+                star_time = context.Request["use_start_time"];
+                end_time = context.Request["use_end_time"];
                 use_time_start = DateTime.Parse(date + " " + star_time);
                 use_time_end = DateTime.Parse(date + " " + end_time);
                 if (DateTime.Compare(use_time_end, use_time_start) != 1)
@@ -60,7 +62,9 @@ namespace TWweb.Web.ashx
                 ap_opinion = context.Request["ap_opinion"];
                 activity = context.Request["activity"];
                 device_need = context.Request["device_need"];
-            
+                ac_start_time = context.Request["ac_start_time"];
+                ac_end_time = context.Request["ac_end_time"];
+
                 if (check()==1)
                 {
                     int re = insert();
@@ -123,7 +127,7 @@ namespace TWweb.Web.ashx
         //插入数据
         public int insert()
         {
-            int i = SqlHelper.ExecuteNonQuery("insert into auditorium(use_time_start,use_time_end,status,activity,ap_user,ap_phone,fz_user,fz_phone,ac_linkman,ac_linkman_phone,main_attend,participants_num,isNullRoom,ap_reason,ap_opinion,device_need,day) values(@use_time_start, @use_time_end,0, @activity,@ap_user,@ap_phone,@fz_user,@fz_phone,@ac_linkman,@ac_linkman_phone,@main_attend,@participants_num,@isNullRoom,@ap_reason,@ap_opinion,@device_need,@day)",
+            int i = SqlHelper.ExecuteNonQuery("insert into auditorium(use_time_start,use_time_end,status,activity,ap_user,ap_phone,fz_user,fz_phone,ac_linkman,ac_linkman_phone,main_attend,participants_num,isNullRoom,ap_reason,ap_opinion,device_need,day,ac_start_time,ac_end_time) values(@use_time_start, @use_time_end,0, @activity,@ap_user,@ap_phone,@fz_user,@fz_phone,@ac_linkman,@ac_linkman_phone,@main_attend,@participants_num,@isNullRoom,@ap_reason,@ap_opinion,@device_need,@day,@ac_start_time,@ac_end_time)",
                     new SqlParameter("@use_time_start", use_time_start),
                     new SqlParameter("@use_time_end", use_time_end),
                     new SqlParameter("@activity", activity),
@@ -139,7 +143,9 @@ namespace TWweb.Web.ashx
                     new SqlParameter("@ap_opinion", ap_opinion),
                     new SqlParameter("@device_need", device_need),
                     new SqlParameter("@day", day),
-                    new SqlParameter("@fz_phone", fz_phone));
+                    new SqlParameter("@fz_phone", fz_phone),
+                    new SqlParameter("@ac_start_time", ac_start_time),
+                    new SqlParameter("@ac_end_time", ac_end_time));
 
             if (i == 1)
             {

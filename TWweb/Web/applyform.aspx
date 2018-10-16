@@ -95,11 +95,10 @@
             <form id="form1">
 			<table style="float: left;" width="100%" height="100%" border="1">
 					<tr>
-						<td width="30%" rowspan="2" align="center">使用时间</td>
-
+						<td width="30%" rowspan="2" align="center">申请时间</td>
 					</tr>  
 					<tr>
-						<td width="75%" colspan="3"> 
+					<td width="75%" colspan="3"> 
             <div class="table-form service-form">
                     <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-cell">
                         <tbody>
@@ -109,16 +108,15 @@
                                     <div class="form-group float-left w140" style="width: 100px;">
                                         <input type="text" name="date" id="datetimepicker3" class="form-control" value="<%=now %>"/>
                                     </div>
-
                                 </td>
                                 <th width="10%"><span>时间：</span></th>
                                 <td>
                                     <div class="form-group float-left w140" style="width: 100px;">
-                                        <input type="text" name="start_time" id="datetimepicker1" class="form-control" value="18:00"/>
+                                        <input type="text" name="use_start_time" id="datetimepicker1" class="form-control" value="18:00"/>
                                     </div>
                                     <div class="float-left form-group-txt">至</div>
                                     <div class="form-group float-left w140" style="width: 100px;">
-                                        <input type="text" name="end_time" id="datetimepicker2" class="form-control" value="22:00"/>
+                                        <input type="text" name="use_end_time" id="datetimepicker2" class="form-control" value="22:00"/>
                                     </div>
 
                                 </td>                                
@@ -128,35 +126,63 @@
 </div>								
 						</td>
 					</tr>
+
+                					<tr>
+						<td width="30%" rowspan="2" align="center">具体活动时间</td>
+					</tr>  
+					<tr>
+					<td width="75%" colspan="3"> 
+            <div class="table-form service-form">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-cell">
+                        <tbody>
+                            <tr>
+                                <th width="10%" ><span>时间：</span></th>
+                                <td>
+                                    <div class="form-group float-left w140" style="width: 100px;">
+                                        <input type="text" name="ac_start_time" id="ac_start_time" class="form-control"  autocomplete="off"/>
+                                    </div>
+                                    <div class="float-left form-group-txt">至</div>
+                                    <div class="form-group float-left w140" style="width: 100px;">
+                                        <input type="text" name="ac_end_time" id="ac_end_time" class="form-control" autocomplete="off"/>
+                                    </div>
+
+                                </td>                                
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>								
+						</td>
+					</tr>
+
 					<tr>
 						<td width="25%" align="center">申请单位负责人</td>
-						<td width="25%"><input name="fz_user" class="txt" type="text" /></td>
+						<td width="25%"><input name="fz_user" class="txt" type="text" value="OOXX"/></td>
 						<td width="20%" align="center">电话</td>
-						<td width="25%"><input name="fz_phone" class="txt" type="text" /></td>
+						<td width="25%"><input name="fz_phone" class="txt" type="text" value="OOXX"/></td>
 					</tr>
 					<tr>
 						<td width="25%" align="center">申请人</td>
-						<td width="25%"><input name="ap_user"  class="txt" type="text" /></td>
+						<td width="25%"><input name="ap_user"  class="txt" type="text" value="OOXX"/></td>
 						<td width="25%" align="center">电话</td>
-						<td width="25%"><input name="ap_phone"  class="txt" type="text" /></td>
+						<td width="25%"><input name="ap_phone"  class="txt" type="text" value="OOXX"/></td>
 					</tr>
 					<tr>
 						<td width="25%" align="center">活动联系人</td>
-						<td width="25%"><input  name="ac_linkman" class="txt" type="text" /></td>
+						<td width="25%"><input  name="ac_linkman" class="txt" type="text" value="OOXX"/></td>
 						<td width="25%" align="center">电话</td>
-						<td width="25%"><input name="ac_linkman_phone"  class="txt" type="text" /></td>
+						<td width="25%"><input name="ac_linkman_phone"  class="txt" type="text" value="OOXX"/></td>
 					</tr>
 					<tr>
 						<td style="height: 70px;" align="center">主要出席人员姓名及其职务</td>
-						<td colspan="3"><textarea name="main_attend"></textarea></td> 
+						<td colspan="3"><textarea name="main_attend">OOXX</textarea></td> 
 					</tr>
 					<tr>
 						<td style="height: 70px;" align="center">活动名称</td>
-						<td colspan="3"><input name="activity" class="txt" type="text" /></td> 
+						<td colspan="3"><input name="activity" class="txt" type="text" value="OOXX"/></td> 
 					</tr>
 					<tr>
 						<td style="height: 70px;" align="center">活动参与人数</td>
-						<td colspan="3"><input name="participants_num" class="txt" type="text" /></td> 
+						<td colspan="3"><input name="participants_num" class="txt" type="text" value="OOXX"/></td> 
 					</tr>
 					<tr>
 						<td style="height: 40px;" align="center">是否阅读演艺厅使用注意事项</td>
@@ -169,7 +195,7 @@
 					</tr>
 					<tr>
 						<td style="height: 80px;" align="center">申请事由</td>
-						<td colspan="3"><textarea name="ap_reason"></textarea></td> 
+						<td colspan="3"><textarea name="ap_reason">OOXX</textarea></td> 
 					</tr>
 					<tr>
 						<td style="height: 120px;" align="center">需要设备</td>
@@ -183,7 +209,7 @@
 					<tr>
 						<td style="height: 80px;" align="center">申请单位意见</td>
 						<td colspan="3">
-							<textarea name="ap_opinion"></textarea>
+							<textarea name="ap_opinion">OOXX</textarea>
 						</td> 
 					</tr>
 					<tr>
@@ -254,6 +280,7 @@
                     top: 10 //向上偏移的位置
                 },
                 selectback: function () {
+                    $("#ac_start_time").val($("#datetimepicker1").val());
                     check_time($("#datetimepicker1").val());
                 }
             });
@@ -292,6 +319,9 @@
                         left: -356, //向左偏移的位置
                         top: 10 //向上偏移的位置
                     },
+                    selectback: function () {
+                        $("#ac_end_time").val($("#datetimepicker2").val());
+                    }
                 });
             } else {
                 $(this).lqdatetimepicker({
@@ -321,9 +351,13 @@
                         left: -356, //向左偏移的位置
                         top: 10 //向上偏移的位置
                     },
+                    selectback: function () {
+                        $("#ac_end_time").val($("#datetimepicker2").val());
+                    }
                 });
             }
         });
+
 
         $("#datetimepicker3").on("click", function (e) {
             e.stopPropagation();
@@ -339,6 +373,76 @@
                 }
             });
 
+        });
+
+        $("#ac_start_time").on("click", function (e) {
+            e.stopPropagation();
+            $(this).lqdatetimepicker({
+                css: 'datetime-hour',
+                date: {
+                    'H': {
+                        begin: $("#datetimepicker1").val(),
+                        end: $("#datetimepicker2").val(),
+                        step: "30"
+                    },
+                    'D': {
+                        month: new Date(),
+                        selected: (new Date()).getDate()
+                    },
+                    'M': {
+                        begin: 1,
+                        end: 12,
+                        selected: (new Date()).getMonth() + 1
+                    },
+                    'Y': {
+                        begin: 2001,
+                        end: (new Date()).getFullYear(),
+                        selected: (new Date()).getFullYear()
+                    }
+                },
+                offset: {
+                    left: -220, //向左偏移的位置
+                    top: 10 //向上偏移的位置
+                },
+                selectback: function () {
+                    
+                }
+            });
+        });
+
+        $("#ac_end_time").on("click", function (e) {
+            e.stopPropagation();
+            $(this).lqdatetimepicker({
+                css: 'datetime-hour',
+                date: {
+                    'H': {
+                        begin: $("#ac_start_time").val(),
+                        end: $("#datetimepicker2").val(),
+                        step: "30"
+                    },
+                    'D': {
+                        month: new Date(),
+                        selected: (new Date()).getDate()
+                    },
+                    'M': {
+                        begin: 1,
+                        end: 12,
+                        selected: (new Date()).getMonth() + 1
+                    },
+                    'Y': {
+                        begin: 2001,
+                        end: (new Date()).getFullYear(),
+                        selected: (new Date()).getFullYear()
+                    }
+                },
+                offset: {
+                    left: -220, //向左偏移的位置
+                    top: 10 //向上偏移的位置
+                },
+                selectback: function () {
+                    
+                }
+            });
         });
     });
 </script>		

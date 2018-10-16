@@ -4,16 +4,16 @@ body{
 	padding: 0;
 }
 .exlist {
-	background-color:#fffbd4;
-	margin:10px auto;
-	padding:5px;
-	width:680px;
-	min-height:620px;
-	height:auto;
-	font-family:"微软雅黑";
-	-webkit-box-shadow:4px 4px 5px #333;/*webkit*/
-	-moz-box-shadow:4px 4px 5px #333;/*firefox*/
-	box-shadow:4px 4px 5px #333;/*opera或ie9*/
+    background-color: #fffbd4;
+    margin: 10px auto;
+    padding: 5px;
+    width: 680px;
+    min-height: 800px;
+    height: auto!important;
+    font-family: "微软雅黑";
+    -webkit-box-shadow: 4px 4px 5px #333; /*webkit*/
+    -moz-box-shadow: 4px 4px 5px #333; /*firefox*/
+    box-shadow: 4px 4px 5px #333; /*opera或ie9*/
 }
 #title {
 	width:200px;
