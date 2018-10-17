@@ -16,6 +16,7 @@
         }
         th{
             border-bottom:1.5px solid #CCCCCC;
+            line-height:30px;
         }
         .layui-laypage a{
             background-color:#fffbd4;

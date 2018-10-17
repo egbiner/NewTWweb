@@ -10,83 +10,86 @@
         <script type="text/javascript" src="js/jquery.js"></script>
         <link href="css/new_file.css" rel="stylesheet" />
         <link href="css/layer.css" rel="stylesheet" />
-        <script type="text/javascript" src="js/layer.js"></script>
+        <script src="js/layui/layui.js"></script>
         <script src="js/lq.datetimepick.js"></script>
         <script src="js/selectUi.js"></script>
         <script type="text/javascript">
+            layui.use('layer', function () {
+                var $ = layui.jquery, layer = layui.layer;
 
-            function sub() {
-                layer.open({
-                    title: '申请须知',
-                    type: 1,
-                    shade: 0,
-                    area: ['600px', '320px'], //宽高
-                    content: '<div style="padding:20px;line-height:30px"><p>1、	仔细阅读《演艺厅使用注意事项》，凡提交《演艺厅使用登记表》即默认同意《演艺厅使用注意事项》的规章制度，请爱护演艺厅的设施设备，如有损坏，照价赔偿。</p><p>2、	现场不允许拉横幅、贴装饰品。</p></div>',
-                    btn: '确定',
-                    btnAlign: 'c',
-                    yes: function (index, layero) {
-                        subajax();
-                        layer.close(index);
-                    }
-                });
-            }
-
-            function subajax() {
-                $.ajax({
-                    type: "POST",
-                    url: 'ashx/apply.ashx',
-                    data: $("#form1").serialize(),
-                    success: function (data) {
-                        if (data == "error")
-                            alertTips("请检查表单内容是否填写完整！");
-                        else if (data == "time_error") {
-                            alertTips("时间选择错误");
-                        } else if (data.indexOf("repeat")>=0) {
-                            alertTips("时间段" + data.split('#')[1] + "已被申请！请重新选择其他时间段。")
+            window.sub = function(){
+                    layer.open({
+                        title: '申请须知',
+                        type: 1,
+                        shade: 0,
+                        area: ['600px', '320px'], //宽高
+                        content: '<div style="padding:20px;line-height:30px"><p>1、	仔细阅读《演艺厅使用注意事项》，凡提交《演艺厅使用登记表》即默认同意《演艺厅使用注意事项》的规章制度，请爱护演艺厅的设施设备，如有损坏，照价赔偿。</p><p>2、	现场不允许拉横幅、贴装饰品。</p></div>',
+                        btn: '确定',
+                        btnAlign: 'c',
+                        yes: function (index, layero) {
+                            subajax();
+                            layer.close(index);
                         }
-                        else {
-                            getDoc(data);
-                            wait();
+                    });
+                }
+
+               window.subajax = function(){
+                    $.ajax({
+                        type: "POST",
+                        url: 'ashx/apply.ashx',
+                        data: $("#form1").serialize(),
+                        success: function (data) {
+                            if (data == "error")
+                                alertTips("请检查表单内容是否填写完整！");
+                            else if (data == "time_error") {
+                                alertTips("时间选择错误");
+                            } else if (data.indexOf("repeat") >= 0) {
+                                alertTips("时间段" + data.split('#')[1] + "已被申请！请重新选择其他时间段。")
+                            }
+                            else {
+                                getDoc(data);
+                                wait();
+                            }
+                        },
+                        error: function () {
+                            alert("服务器错误")
                         }
-                    },
-                    error: function () {
-                        alert("服务器错误")
-                    }
-                });
-            }
+                    });
+                }
 
-            //获取doc文档
-            function getDoc(id) {
-                $.ajax({
-                    type: "POST",
-                    url: 'ashx/getDoc.ashx',
-                    data: { "id": id },
-                    success: function (data) {
-                        if (data == "error")
-                            alertTips("申请成功，活动名存在非法字符导致文件生成失败!");
-                        else
-                            location.href = "recode.aspx?recode=" + id;
-                    },
-                    error: function () {
-                        alert("服务器错误")
-                    }
-                });
-            }
+                //获取doc文档
+               window.getDoc = function(id){
+                    $.ajax({
+                        type: "POST",
+                        url: 'ashx/getDoc.ashx',
+                        data: { "id": id },
+                        success: function (data) {
+                            if (data == "error")
+                                alertTips("申请成功，活动名存在非法字符导致文件生成失败!");
+                            else
+                                location.href = "recode.aspx?recode=" + id;
+                        },
+                        error: function () {
+                            alert("服务器错误")
+                        }
+                    });
+                }
 
-            function wait() {
-                layer.msg('正在为您加载,请稍等 ', {
-                    time: 10000,
-                });
-            }
+               window.wait =  function() {
+                    layer.msg('正在为您加载,请稍等 ', {
+                        time: 10000,
+                    });
+                }
 
-            function alertTips(tip) {
-                layer.open({
-                    title: "Tips",
-                    type: 0,
-                    content: tip,
-                    shade: 0,
-                });
-            }
+               window.alertTips = function(tip) {
+                    layer.open({
+                        title: "Tips",
+                        type: 0,
+                        content: tip,
+                        shade: 0,
+                    });
+                }
+            });
         </script>
 	</head>
 	<body >
@@ -109,14 +112,14 @@
                                         <input type="text" name="date" id="datetimepicker3" class="form-control" value="<%=now %>"/>
                                     </div>
                                 </td>
-                                <th width="10%"><span>时间：</span></th>
+                                <th width="7.5%"><span></span></th>
                                 <td>
                                     <div class="form-group float-left w140" style="width: 100px;">
-                                        <input type="text" name="use_start_time" id="datetimepicker1" class="form-control" value="18:00"/>
+                                        <input type="text" name="use_start_time" id="datetimepicker1" class="form-control" />
                                     </div>
                                     <div class="float-left form-group-txt">至</div>
                                     <div class="form-group float-left w140" style="width: 100px;">
-                                        <input type="text" name="use_end_time" id="datetimepicker2" class="form-control" value="22:00"/>
+                                        <input type="text" name="use_end_time" id="datetimepicker2" class="form-control"/>
                                     </div>
 
                                 </td>                                
@@ -280,7 +283,7 @@
                     top: 10 //向上偏移的位置
                 },
                 selectback: function () {
-                    $("#ac_start_time").val($("#datetimepicker1").val());
+                    //$("#ac_start_time").val($("#datetimepicker1").val());
                     check_time($("#datetimepicker1").val());
                 }
             });
@@ -320,7 +323,7 @@
                         top: 10 //向上偏移的位置
                     },
                     selectback: function () {
-                        $("#ac_end_time").val($("#datetimepicker2").val());
+                        //$("#ac_end_time").val($("#datetimepicker2").val());
                     }
                 });
             } else {
@@ -352,7 +355,7 @@
                         top: 10 //向上偏移的位置
                     },
                     selectback: function () {
-                        $("#ac_end_time").val($("#datetimepicker2").val());
+                        //$("#ac_end_time").val($("#datetimepicker2").val());
                     }
                 });
             }

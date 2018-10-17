@@ -65,6 +65,12 @@ namespace TWweb.Web.ashx
                 ac_start_time = context.Request["ac_start_time"];
                 ac_end_time = context.Request["ac_end_time"];
 
+                if (ac_start_time == "" || ac_end_time == "")
+                {
+                    context.Response.Write("error");
+                    return;
+                }
+
                 if (check()==1)
                 {
                     int re = insert();
@@ -127,7 +133,7 @@ namespace TWweb.Web.ashx
         //插入数据
         public int insert()
         {
-            int i = SqlHelper.ExecuteNonQuery("insert into auditorium(use_time_start,use_time_end,status,activity,ap_user,ap_phone,fz_user,fz_phone,ac_linkman,ac_linkman_phone,main_attend,participants_num,isNullRoom,ap_reason,ap_opinion,device_need,day,ac_start_time,ac_end_time) values(@use_time_start, @use_time_end,0, @activity,@ap_user,@ap_phone,@fz_user,@fz_phone,@ac_linkman,@ac_linkman_phone,@main_attend,@participants_num,@isNullRoom,@ap_reason,@ap_opinion,@device_need,@day,@ac_start_time,@ac_end_time)",
+            int i = SqlHelper.ExecuteNonQuery("insert into auditorium(use_time_start,use_time_end,status,activity,ap_user,ap_phone,fz_user,fz_phone,ac_linkman,ac_linkman_phone,main_attend,participants_num,isNullRoom,ap_reason,ap_opinion,device_need,day,ac_start_time,ac_end_time,create_time) values(@use_time_start, @use_time_end,0, @activity,@ap_user,@ap_phone,@fz_user,@fz_phone,@ac_linkman,@ac_linkman_phone,@main_attend,@participants_num,@isNullRoom,@ap_reason,@ap_opinion,@device_need,@day,@ac_start_time,@ac_end_time,GETDATE())",
                     new SqlParameter("@use_time_start", use_time_start),
                     new SqlParameter("@use_time_end", use_time_end),
                     new SqlParameter("@activity", activity),

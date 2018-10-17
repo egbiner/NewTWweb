@@ -14,9 +14,11 @@
 <body>
     <div class="rt_content">
         <div class="page_title">
-            <h2 class="fl">文章管理</h2>         
+            <h2 class="fl">文章管理</h2>       
+            <%if (adm.type_id == 1){ %>
                 <input style="line-height:170%;" type="text" name="key" id="key"/>
-                <button onclick="gotoSearch()" style="line-height:170%;">搜索 </button>               
+                <button onclick="gotoSearch()" style="line-height:170%;">搜索 </button>
+            <%} %>
             <div class="search">
                 <span class="sttl">类型：</span>
                 <select name="type_id" id="navid" onchange="ChangeType(this.value)">

@@ -60,10 +60,11 @@ namespace DAL
         }
 
 
-        public static Page GetApplyInfoPage(int page_size, int page_number)
+        public static Page GetApplyInfoPage(int page_size, int page_number,int status)
         {
             DataTable dt = SqlHelper.ExecuteDataTable(page_size, page_number,
-                    "select * from auditorium order by status,use_time_start");
+                    "select * from auditorium where status = @status order by status,use_time_start",
+                    new SqlParameter("@status",status));
             List<ApplyForm> apply_lst = new List<ApplyForm>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -71,7 +72,7 @@ namespace DAL
                 ApplyForm af = new ApplyForm(id);
                 apply_lst.Add(af);
             }
-            int total = GetNewsCountOfApplyInfo();
+            int total = GetNewsCountOfApplyInfo(status);
             int total_page = total / page_size + 1;
             return new Page(apply_lst, total, page_size, page_number);
         }
@@ -108,9 +109,10 @@ namespace DAL
             return new Page(apply_lst, total, page_size, page_number);
         }
 
-        public static int GetNewsCountOfApplyInfo()
+        public static int GetNewsCountOfApplyInfo(int status)
         {
-            string count = SqlHelper.ExecuteScalar("select count(1) from auditorium").ToString();
+            string count = SqlHelper.ExecuteScalar("select count(1) from auditorium where status = @status",
+                new SqlParameter("@status",status)).ToString();
             return int.Parse(count);
         }
 

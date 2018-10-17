@@ -37,7 +37,7 @@ $(function(){
     </div>
         <input type="button" onclick="search()" class="send" value="查询" />
     </fieldset>
-    <fieldset style="min-height:100px">
+    <fieldset style="min-height:100px;">
     <legend>回执信息</legend>
      <div style="text-align:center" id="intext">
     </div>

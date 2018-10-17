@@ -10,6 +10,7 @@ namespace TWweb.Admin
     {
         public Page apply_page = null;
         public int page_num = 1;
+        public int status = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             object username = Session["admin"];
@@ -23,7 +24,11 @@ namespace TWweb.Admin
             {
                 page_num = int.Parse(page_num_ob.ToString());
             }
-            apply_page = ApplyForm.GetApplyInfoPage(10, page_num);
+            if (Request["status"] != null)
+            {
+                status = Convert.ToInt32(Request["status"]);
+            }
+            apply_page = ApplyForm.GetApplyInfoPage(10, page_num,status);
         }
     }
 }
