@@ -24,6 +24,12 @@
         .layui-laypage a{
             background-color:#fffbd4;
         }
+        .search{
+            margin:15px 15px 0px 0px;
+
+            float:right;
+            background-color:#fffbd4;
+        }
     </style>
 </head>
 <body>
@@ -31,7 +37,11 @@
 <div class="box" style="margin-left:20px;margin-top:30px;height:700px;width:700px;border-collapse: collapse;">
 	<div class="right">
         <br />
-		<h3>最近活动预览</h3>
+		<h3 style="display:inline-block">最近活动预览</h3>
+<%--        <select id="condition" class="search" name="condition">
+            <option value="0" selected="selected">全部</option>
+            <option value="1">最近一个月</option>
+        </select>--%>
         <table border="0" style="table-layout:fixed;margin:20px 10px 0px 10px;" cellspacing="0" cellpadding="0">
             <tr>
                 <th style="width:200px;">活动名称</th>
@@ -44,7 +54,7 @@
                 <tr>
                     <td><%=alt.activity %></td>
                     <td><%=((DateTime)alt.use_time_start).ToString("yyyy-MM-dd HH:mm")%>~<%=((DateTime)alt.use_time_end).ToString("HH:mm")%></td>
-                    <td><%=((DateTime)alt.use_time_start).ToString("HH:mm")%>~<%=((DateTime)alt.use_time_end).ToString("HH:mm")%></td>
+                    <td><%=alt.ac_start_time%>~<%=alt.ac_end_time%></td>
                     <td><%=alt.ap_user %></td>
                     <td><%=alt.ap_phone %></td>
                 </tr>

@@ -15,19 +15,18 @@ namespace TWweb.Web.ashx
     {
         string day;
         DateTime use_time_start,use_time_end;
-        string activity;//活动名称
-        string ap_user, ap_phone;//活动负责人
-        string fz_user, fz_phone;//负责人
-        string ac_linkman;//活动联系人
+        string activity;
+        string ap_user, ap_phone;
+        string fz_user, fz_phone;
+        string ac_linkman;
         string ac_linkman_phone;
         string main_attend;
         string participants_num;
-        int isReadNotice;
-        string ap_reason;//申请原由
-        string device_need;//所需设备
-        string ap_opinion;//申请单位意见
+        string ap_reason;
+        string device_need;
+        string ap_opinion;
         int isNullRoom;
-        // help Value
+
         string date;
         string star_time;
         string end_time;
@@ -44,11 +43,6 @@ namespace TWweb.Web.ashx
                 end_time = context.Request["use_end_time"];
                 use_time_start = DateTime.Parse(date + " " + star_time);
                 use_time_end = DateTime.Parse(date + " " + end_time);
-                if (DateTime.Compare(use_time_end, use_time_start) != 1)
-                {
-                    context.Response.Write("time_error");
-                    return;
-                }
                 ap_user = context.Request["ap_user"];
                 ap_phone = context.Request["ap_phone"];
                 fz_user = context.Request["fz_user"];
@@ -65,12 +59,21 @@ namespace TWweb.Web.ashx
                 ac_start_time = context.Request["ac_start_time"];
                 ac_end_time = context.Request["ac_end_time"];
 
+
+                if (activity.Contains("_"))
+                {
+                    activity.Replace('_', ' ');
+                }
+                if (DateTime.Compare(use_time_end, use_time_start) != 1)
+                {
+                    context.Response.Write("time_error");
+                    return;
+                }
                 if (ac_start_time == "" || ac_end_time == "")
                 {
                     context.Response.Write("error");
                     return;
                 }
-
                 if (check()==1)
                 {
                     int re = insert();
@@ -99,7 +102,6 @@ namespace TWweb.Web.ashx
         //判断
         public int check()
         {
-            //DataTable table = SqlHelper.ExecuteDataTable("select * from auditorium where status='1' and day=@day", new SqlParameter("@day", day));
             DataTable table = SqlHelper.ExecuteDataTable("select * from auditorium where status != '2' and  day=@day", new SqlParameter("@day", day));
             if (table.Rows.Count == 0)
             {

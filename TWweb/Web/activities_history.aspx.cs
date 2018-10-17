@@ -12,6 +12,7 @@ namespace TWweb.Web
         public int page = 1;
         public int count = 10;
         public int limit = 9;
+        //public int condition = 0;// 0全部 1最近一个月
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request["page"] != null)
@@ -22,6 +23,10 @@ namespace TWweb.Web
             {
                 limit = Convert.ToInt32(Request["limit"]);
             }
+            //if (Request["condition"] != null)
+            //{
+            //    condition = Convert.ToInt32(Request["condition"]);
+            //}
             apply_page = ApplyForm.GetEd(limit, page);
             count = ApplyForm.GetEdCount();
         }

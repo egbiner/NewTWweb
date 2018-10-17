@@ -44,7 +44,7 @@
                     <tr>
                         <td><%=alt.activity %></td>
                         <td><%=((DateTime)alt.use_time_start).ToString("yyyy-MM-dd HH:mm")%>~<%=((DateTime)alt.use_time_end).ToString("HH:mm")%></td>
-                        <td><%=((DateTime)alt.use_time_start).ToString("HH:mm")%>~<%=((DateTime)alt.use_time_end).ToString("HH:mm")%></td>
+                        <td><%=alt.ac_start_time%>~<%=alt.ac_end_time%></td>
                         <td><%=alt.ap_user %></td>
                         <td><%=alt.ap_phone %></td>
                     </tr>

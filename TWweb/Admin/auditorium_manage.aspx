@@ -31,8 +31,8 @@
             <table class="table">
         <tr>
             <th>回执码</th>
-            <th>申请使用日期</th>
-            <th>具体使用时间</th>
+            <th colspan="2">申请使用时间</th>
+            <th>活动时间</th>
             <th style="max-width:200px!important">活动名称</th>
             <th>申请人</th>
             <th>进行状况</th>
@@ -44,7 +44,9 @@
         <tr>
             <td><%=alt.id %></td>
             <td><%=alt.use_time_start.ToString("yyyy-MM-dd")%></td>
-            <td><%=alt.use_time_start.ToString("t")+"-"+ alt.use_time_end.ToString("t")%></td>
+            <td><%=alt.use_time_start.ToString("HH:mm")%>-<%=alt.use_time_end.ToString("HH:mm")%></td>
+<%--            <td><%=alt.use_time_start.ToString("yyyy-MM-dd")%></td>--%>
+            <td><%=alt.ac_start_time+"-"+ alt.ac_end_time%></td>
             <td><%=alt.activity%></td>
             <td><%=alt.ap_user %></td>
             <%if (int.Parse(alt.status.ToString()) == 0) { %>
@@ -60,14 +62,15 @@
 <%--            <td>
                 <a style="color:blue" href="javascript:manage('reset', '<%=alt.id %>')">重置</a>
             </td>--%>
-             <td>
-                <a style="color:blue" href="javascript:modify(<%=alt.id %>)">修改</a>
-            </td>
+            
             <td>
                 <a style="color:green" href="javascript:check('<%=alt.id %>')">通过</a>
             </td>
             <td>
                 <a style="color:orangered" href="javascript:dis_prompt(<%=alt.id %>)">拒绝</a>
+            </td>
+             <td>
+                <a style="color:#fd7600" href="javascript:modify(<%=alt.id %>)">修改</a>
             </td>
             <td>
                 <a href="javascript:manage('del', '<%=alt.id %>')" class="del_but">删除</a>
@@ -132,7 +135,7 @@
                     layer.open({
                         title: '修改时间',
                         type: 2,
-                        area: ['700px', '500px'], //宽高
+                        area: ['700px', '450px'], //宽高
                         shade: 0,
                         content: 'apply_modify.aspx?id=' + id,
                         maxmin: true,
@@ -158,7 +161,7 @@
 
             function ChangeType(_status) {
                 status = _status;
-                ToPage(page_num);
+                ToPage(1);
             }
 
             function check(id) {

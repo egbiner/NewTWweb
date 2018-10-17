@@ -88,7 +88,13 @@
                         content: tip,
                         shade: 0,
                     });
-                }
+               }
+               window.alertLimitTips = function (tip) {
+                   layer.tips(tip, '#datetimepicker1', {
+                       tips: 3,
+                       time: 5000
+                   });
+               }
             });
         </script>
 	</head>
@@ -109,17 +115,17 @@
                                 <th width="10%"><span>日期：</span></th>
                                 <td width="100px">
                                     <div class="form-group float-left w140" style="width: 100px;">
-                                        <input type="text" name="date" id="datetimepicker3" class="form-control" value="<%=now %>"/>
+                                        <input type="text" name="date" id="datetimepicker3" class="form-control" value="<%=now %>" autocomplete="off"/>
                                     </div>
                                 </td>
                                 <th width="7.5%"><span></span></th>
                                 <td>
                                     <div class="form-group float-left w140" style="width: 100px;">
-                                        <input type="text" name="use_start_time" id="datetimepicker1" class="form-control" />
+                                        <input type="text" name="use_start_time" id="datetimepicker1" class="form-control" autocomplete="off"/>
                                     </div>
                                     <div class="float-left form-group-txt">至</div>
                                     <div class="form-group float-left w140" style="width: 100px;">
-                                        <input type="text" name="use_end_time" id="datetimepicker2" class="form-control"/>
+                                        <input type="text" name="use_end_time" id="datetimepicker2" class="form-control" autocomplete="off"/>
                                     </div>
 
                                 </td>                                
@@ -131,7 +137,7 @@
 					</tr>
 
                 					<tr>
-						<td width="30%" rowspan="2" align="center">具体活动时间</td>
+						<td width="30%" rowspan="2" align="center">活动开展时间</td>
 					</tr>  
 					<tr>
 					<td width="75%" colspan="3"> 
@@ -241,7 +247,7 @@
             time[3] = '14:00';
             for (x in time) {
                 if (time[x] == data) {
-                    alert("12:30 ~ 14:00 时间段内不能申请！");
+                    alertLimitTips("12:30 ~ 14:00 时间段内不能申请！");
                     $("#datetimepicker1").val('18:00');
                 }
             }
@@ -283,7 +289,8 @@
                     top: 10 //向上偏移的位置
                 },
                 selectback: function () {
-                    //$("#ac_start_time").val($("#datetimepicker1").val());
+                    $("#ac_start_time").val("");
+                    $("#ac_end_time").val("");
                     check_time($("#datetimepicker1").val());
                 }
             });
@@ -323,7 +330,8 @@
                         top: 10 //向上偏移的位置
                     },
                     selectback: function () {
-                        //$("#ac_end_time").val($("#datetimepicker2").val());
+                        $("#ac_start_time").val("");
+                        $("#ac_end_time").val("");
                     }
                 });
             } else {
@@ -355,7 +363,8 @@
                         top: 10 //向上偏移的位置
                     },
                     selectback: function () {
-                        //$("#ac_end_time").val($("#datetimepicker2").val());
+                        $("#ac_start_time").val("");
+                        $("#ac_end_time").val("");
                     }
                 });
             }
