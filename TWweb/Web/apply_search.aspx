@@ -68,9 +68,9 @@ $(function(){
                     $("#intext").empty().append($(objData.result));
                     $("#file_download").empty().append(objData.fileName).attr("href", objData.url);
                 },
-            error: function () {
-                alert("500 服务器返回错误")
-            }
+                error: function () {
+                    alert("500 服务器返回错误")
+                }
         })
         }
     </script>

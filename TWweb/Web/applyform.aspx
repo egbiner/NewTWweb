@@ -165,33 +165,33 @@
 
 					<tr>
 						<td width="25%" align="center">申请单位负责人</td>
-						<td width="25%"><input name="fz_user" class="txt" type="text" value="OOXX"/></td>
+						<td width="25%"><input name="fz_user" class="txt" type="text" /></td>
 						<td width="20%" align="center">电话</td>
-						<td width="25%"><input name="fz_phone" class="txt" type="text" value="OOXX"/></td>
+						<td width="25%"><input name="fz_phone" class="txt" type="text" /></td>
 					</tr>
 					<tr>
 						<td width="25%" align="center">申请人</td>
-						<td width="25%"><input name="ap_user"  class="txt" type="text" value="OOXX"/></td>
+						<td width="25%"><input name="ap_user"  class="txt" type="text" /></td>
 						<td width="25%" align="center">电话</td>
-						<td width="25%"><input name="ap_phone"  class="txt" type="text" value="OOXX"/></td>
+						<td width="25%"><input name="ap_phone"  class="txt" type="text"/></td>
 					</tr>
 					<tr>
 						<td width="25%" align="center">活动联系人</td>
-						<td width="25%"><input  name="ac_linkman" class="txt" type="text" value="OOXX"/></td>
+						<td width="25%"><input  name="ac_linkman" class="txt" type="text" /></td>
 						<td width="25%" align="center">电话</td>
-						<td width="25%"><input name="ac_linkman_phone"  class="txt" type="text" value="OOXX"/></td>
+						<td width="25%"><input name="ac_linkman_phone"  class="txt" type="text" /></td>
 					</tr>
 					<tr>
 						<td style="height: 70px;" align="center">主要出席人员姓名及其职务</td>
-						<td colspan="3"><textarea name="main_attend">OOXX</textarea></td> 
+						<td colspan="3"><textarea name="main_attend"></textarea></td> 
 					</tr>
 					<tr>
 						<td style="height: 70px;" align="center">活动名称</td>
-						<td colspan="3"><input name="activity" class="txt" type="text" value="OOXX"/></td> 
+						<td colspan="3"><input name="activity" class="txt" type="text" /></td> 
 					</tr>
 					<tr>
 						<td style="height: 70px;" align="center">活动参与人数</td>
-						<td colspan="3"><input name="participants_num" class="txt" type="text" value="OOXX"/></td> 
+						<td colspan="3"><input name="participants_num" class="txt" type="text" /></td> 
 					</tr>
 					<tr>
 						<td style="height: 40px;" align="center">是否阅读演艺厅使用注意事项</td>
@@ -204,7 +204,7 @@
 					</tr>
 					<tr>
 						<td style="height: 80px;" align="center">申请事由</td>
-						<td colspan="3"><textarea name="ap_reason">OOXX</textarea></td> 
+						<td colspan="3"><textarea name="ap_reason"></textarea></td> 
 					</tr>
 					<tr>
 						<td style="height: 120px;" align="center">需要设备</td>
@@ -218,7 +218,7 @@
 					<tr>
 						<td style="height: 80px;" align="center">申请单位意见</td>
 						<td colspan="3">
-							<textarea name="ap_opinion">OOXX</textarea>
+							<textarea name="ap_opinion"></textarea>
 						</td> 
 					</tr>
 					<tr>

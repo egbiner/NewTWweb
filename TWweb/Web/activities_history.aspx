@@ -37,7 +37,7 @@
 <div class="box" style="margin-left:20px;margin-top:30px;height:700px;width:700px;border-collapse: collapse;">
 	<div class="right">
         <br />
-		<h3 style="display:inline-block">最近活动预览</h3>
+		<h3 style="display:inline-block">最近活动</h3>
 <%--        <select id="condition" class="search" name="condition">
             <option value="0" selected="selected">全部</option>
             <option value="1">最近一个月</option>

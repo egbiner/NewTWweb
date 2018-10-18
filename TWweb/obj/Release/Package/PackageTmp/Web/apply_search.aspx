@@ -37,11 +37,20 @@ $(function(){
     </div>
         <input type="button" onclick="search()" class="send" value="查询" />
     </fieldset>
-    <fieldset style="min-height:100px">
+    <fieldset style="min-height:100px;">
     <legend>回执信息</legend>
      <div style="text-align:center" id="intext">
     </div>
     </fieldset>
+    <fieldset>
+    <legend>打印文件下载</legend>
+     <div class="row">
+      <label></label>
+      <p style="text-align:center"><a id="file_download" target="_blank" href="#" ></a></p>
+    </div>
+        
+    </fieldset>
+    <div class="clearfloat" style="clear:both;height:0;font-size: 1px;line-height: 0px;"></div>
 </div>
     <script type="text/javascript">
         function opendetail(id){
@@ -53,14 +62,15 @@ $(function(){
                 type: "POST",
                 url: 'ashx/searchResult.ashx',
                 data: { "recode": $("#recode").val() },
-                success: function (data) {   
-                    $("#intext").empty();
-                    var $h1 = $(data);
-                    $("#intext").append($h1);
+                dataType: 'html',
+                success: function (data) { 
+                    var objData = eval('(' + data + ')');
+                    $("#intext").empty().append($(objData.result));
+                    $("#file_download").empty().append(objData.fileName).attr("href", objData.url);
                 },
-            error: function () {
-                alert("500 服务器返回错误")
-            }
+                error: function () {
+                    alert("500 服务器返回错误")
+                }
         })
         }
     </script>

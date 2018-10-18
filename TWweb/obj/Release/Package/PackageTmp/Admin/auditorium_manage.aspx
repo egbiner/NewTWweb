@@ -10,20 +10,30 @@
     <link href="css/admin_index2.css" rel="stylesheet" />
     <script src="js/jquery-3.0.0.min.js"></script>
     <script src="js/do_ajax.js"></script>
-    <script src="../Web/js/layer.js"></script>
-    <link href="../Web/css/layer.css" rel="stylesheet" />
+<%--    <script src="../Web/js/layer.js"></script>
+    <link href="../Web/css/layer.css" rel="stylesheet" />--%>
+    <script src="../Web/js/layui/layui.js"></script>
+    <link href="../Web/js/layui/css/layui.css" rel="stylesheet" />
 </head>
 <body>
     <div class="rt_content">
         <div class="page_title">
             <h2 class="fl">演艺厅申请情况</h2>
+             <div class="search" style="margin-top:3px">
+            <span class="sttl">类型：</span>
+                <select name="status" id="status" onchange="ChangeType(this.value)">
+                    <option value="0">待审核</option>
+                    <option value="1">已通过</option>
+                    <option value="2">已拒绝</option>
+                </select>
+                 </div>
         </div>
             <table class="table">
         <tr>
             <th>回执码</th>
-            <th>申请使用日期</th>
-            <th>具体使用时间</th>
-            <th>活动名称</th>
+            <th colspan="2">申请使用时间</th>
+            <th>活动时间</th>
+            <th style="max-width:200px!important">活动名称</th>
             <th>申请人</th>
             <th>进行状况</th>
             <th colspan="5">操作</th>
@@ -34,7 +44,9 @@
         <tr>
             <td><%=alt.id %></td>
             <td><%=alt.use_time_start.ToString("yyyy-MM-dd")%></td>
-            <td><%=alt.use_time_start.ToString("t")+"-"+ alt.use_time_end.ToString("t")%></td>
+            <td><%=alt.use_time_start.ToString("HH:mm")%>-<%=alt.use_time_end.ToString("HH:mm")%></td>
+<%--            <td><%=alt.use_time_start.ToString("yyyy-MM-dd")%></td>--%>
+            <td><%=alt.ac_start_time+"-"+ alt.ac_end_time%></td>
             <td><%=alt.activity%></td>
             <td><%=alt.ap_user %></td>
             <%if (int.Parse(alt.status.ToString()) == 0) { %>
@@ -47,14 +59,18 @@
             <td>
                 <a href="javascript:opendetail(<%=alt.id %>)">查看详细</a>
             </td>
-            <td>
+<%--            <td>
                 <a style="color:blue" href="javascript:manage('reset', '<%=alt.id %>')">重置</a>
-            </td>
+            </td>--%>
+            
             <td>
                 <a style="color:green" href="javascript:check('<%=alt.id %>')">通过</a>
             </td>
             <td>
                 <a style="color:orangered" href="javascript:dis_prompt(<%=alt.id %>)">拒绝</a>
+            </td>
+             <td>
+                <a style="color:#fd7600" href="javascript:modify(<%=alt.id %>)">修改</a>
             </td>
             <td>
                 <a href="javascript:manage('del', '<%=alt.id %>')" class="del_but">删除</a>
@@ -73,56 +89,66 @@
         </aside>
 
         <script>
-
-
             var total_page = <%=apply_page.total_page %>;
             var page_num = <%=page_num %>;
-            $("#navid").val(navid);
+            var status = <%=status %>;
+            $("#status").val(status);
 
             function ToPage(page_number) {
                 if (page_number < 1) {
                     page_num = 1;
                     return;
                 }
-                else if(page_number > total_page){
+                else if (page_number > total_page) {
                     page_num = total_page;
                     return;
                 }
-                location.href="auditorium_manage.aspx?page_num="+page_number;
+                location.href = "auditorium_manage.aspx?page_num=" + page_number + "&status=" + status;
             }
-
             function goToPage() {
                 page_num = document.getElementById("page_number").value;
                 ToPage(page_num);
             }
-
             function dis_prompt(id) {
                 var reason = prompt("请输入拒绝原因", "");
-                if (reason!=null && reason!="")
-                {
+                if (reason != null && reason != "") {
                     manage("reject", id + "$" + reason);
                 }
             }
             function opendetail(id) {
-                layer.open({
-                    title:'申请详情',
-                    type: 2,
-                    area: ['790px', '80%'], //宽高
-                    shade: 0,
-                    content: 'applyform_modle.aspx?id='+id,
-                    maxmin: true,
+                layui.use('layer', function () {
+                    var $ = layui.jquery, layer = layui.layer;
+                    layer.open({
+                        title: '申请详情',
+                        type: 2,
+                        area: ['790px', '80%'], //宽高
+                        shade: 0,
+                        content: 'applyform_modle.aspx?id=' + id,
+                        maxmin: true,
+                    });
                 });
+            }
 
-                    //window.open('applyform_modle.aspx?id='+id, 'new', 'location=no, toolbar=no,height=770,width=720');
-                   // return false;
-           }
-            function manage(action,id) {
+            function modify(id) {
+                layui.use('layer', function () {
+                    var $ = layui.jquery, layer = layui.layer;
+                    layer.open({
+                        title: '修改时间',
+                        type: 2,
+                        area: ['700px', '450px'], //宽高
+                        shade: 0,
+                        content: 'apply_modify.aspx?id=' + id,
+                        maxmin: true,
+                    });
+                });
+            }
+            function manage(action, id) {
                 switch (action) {
                     case "reset":
-                        DoAjax("你确定要重置？", "ashx/yanyiting_manage.ashx",id,action);
+                        DoAjax("你确定要重置？", "ashx/yanyiting_manage.ashx", id, action);
                         break;
                     case "pass":
-                        DoAjax("你确定要通过？", "ashx/yanyiting_manage.ashx",id,action);
+                        DoAjax("你确定要通过？", "ashx/yanyiting_manage.ashx", id, action);
                         break;
                     case "reject":
                         DoAjax("你确定要拒绝？", "ashx/yanyiting_manage.ashx", id, action);
@@ -132,14 +158,19 @@
                         break;
                 }
             }
-          
+
+            function ChangeType(_status) {
+                status = _status;
+                ToPage(1);
+            }
+
             function check(id) {
                 $.ajax({
                     type: "POST",
                     url: 'ashx/yanyiting_manage.ashx',
                     data: {
                         "id": id,
-                        "status":"check"
+                        "status": "check"
                     },
                     success: function (data) {
                         if (data != "OK")

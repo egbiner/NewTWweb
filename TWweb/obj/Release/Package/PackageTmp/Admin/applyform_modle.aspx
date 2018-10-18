@@ -20,7 +20,7 @@
 		<div class="content">
 			<table style="float: left;" width="100%" height="100%" border="1">
 					<tr>
-						<td style="height: 50px;" rowspan="2" align="center">使用时间</td>
+						<td style="height: 50px;" rowspan="2" align="center">申请时间</td>
 
 					</tr>  
 					<tr>
@@ -33,9 +33,28 @@
                             </tr>
                         </tbody>
                     </table>
+            </div>								
+						</td>
+					</tr>
+
+                <tr>
+						<td style="height: 50px;" rowspan="2" align="center">具体活动时间</td>
+
+					</tr>  
+					<tr>
+						<td width="75%" colspan="3"> 
+            <div class="table-form service-form">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="table table-cell">
+                        <tbody>
+                            <tr>
+                                <td><%=dt.Rows[0]["ac_start_time"]%> - <%=dt.Rows[0]["ac_end_time"]%></td>
+                            </tr>
+                        </tbody>
+                    </table>
 </div>								
 						</td>
 					</tr>
+
 					<tr>
 						<td width="25%" align="center">申请单位负责人</td>
 						<td width="25%"><input name="fz_user" class="txt" type="text" value=" <%=dt.Rows[0]["fz_user"] %>"/></td>
@@ -56,7 +75,7 @@
 					</tr>
 					<tr>
 						<td style="height: 70px;" align="center">主要出席人员姓名及其职务</td>
-						<td colspan="3"><p> <%=dt.Rows[0]["main_attend"] %></p></td> 
+						<td colspan="3"><p><%=dt.Rows[0]["main_attend"] %></p></td> 
 					</tr>
 					<tr>
 						<td style="height: 70px;" align="center">活动名称</td>
