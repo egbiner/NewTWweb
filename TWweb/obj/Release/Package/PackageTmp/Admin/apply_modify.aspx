@@ -210,21 +210,30 @@
         });
 
 
-        $("#datetimepicker3").on("click", function (e) {
-            e.stopPropagation();
-            $(this).lqdatetimepicker({
-                css: 'datetime-day',
-                offset: {
-                    left: -70, //向左偏移的位置
-                    top: 10 //向上偏移的位置
-                },
-                dateType: 'D',
-                selectback: function () {
+        //$("#datetimepicker3").on("click", function (e) {
+        //    e.stopPropagation();
+        //    $(this).lqdatetimepicker({
+        //        css: 'datetime-day',
+        //        offset: {
+        //            left: -70, //向左偏移的位置
+        //            top: 10 //向上偏移的位置
+        //        },
+        //        dateType: 'D',
+        //        selectback: function () {
 
-                }
+        //        }
+        //    });
+
+        //});
+
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#datetimepicker3'
             });
-
         });
+
+
 
         $("#ac_start_time").on("click", function (e) {
             e.stopPropagation();

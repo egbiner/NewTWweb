@@ -34,11 +34,12 @@
          <%}else{%>
             <table border="0" style="table-layout:fixed;margin:20px 10px 0px 10px;" cellspacing="0" cellpadding="0">
                 <tr>
-                    <th style="width:200px;">活动名称</th>
+                    <th style="width:170px;">活动名称</th>
                     <th style="width:200px">申请时间</th>
                     <th style="width:100px">活动时间</th>
                     <th style="width:50px">申请人</th>
                     <th style="width:100px">申请人电话</th>
+                    <th style="width:80px">状态</th>
                 </tr>
                 <% foreach (var alt in apply_page.applypages){ %>
                     <tr>
@@ -47,6 +48,12 @@
                         <td><%=alt.ac_start_time%>~<%=alt.ac_end_time%></td>
                         <td><%=alt.ap_user %></td>
                         <td><%=alt.ap_phone %></td>
+                        <td><%if (alt.status == "1"){%>
+                            <span style="color:green">已通过</span>
+                            <%}else{%>
+                            <span style="color:#fe9708">待审核</span>
+                            <%} %>
+                        </td>
                     </tr>
                 <%} %>
             </table>

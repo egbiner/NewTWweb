@@ -80,7 +80,7 @@ namespace DAL
         public static Page GetIng(int page_size, int page_number)
         {
             DataTable dt = SqlHelper.ExecuteDataTable(page_size, page_number,
-                    "select * from auditorium where status=1 and use_time_end >= GETDATE() order by use_time_start");
+                    "select * from auditorium where status in (0,1) and use_time_end >= GETDATE() order by use_time_start");
             List<ApplyForm> apply_lst = new List<ApplyForm>();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -119,7 +119,7 @@ namespace DAL
 
         public static int GetIngCount()
         {
-            string count = SqlHelper.ExecuteScalar("select count(*) from auditorium where status=1 and use_time_end >= GETDATE()").ToString();
+            string count = SqlHelper.ExecuteScalar("select count(*) from auditorium where status in (0,1) and use_time_end >= GETDATE()").ToString();
             return int.Parse(count);
         }
 

@@ -5,7 +5,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset="utf-8" />
 		<meta charset="utf-8">
-		<title>大活表格</title>
+		<title>演艺厅申请表</title>
 
         <script type="text/javascript" src="../Web/js/jquery.js"></script>
         <link href="../Web/css/new_file.css" rel="stylesheet" />

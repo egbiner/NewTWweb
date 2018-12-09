@@ -7,7 +7,7 @@ namespace TWweb.Web
         public string now;
         protected void Page_Load(object sender, EventArgs e)
         {
-            now = DateTime.Now.ToString("yyyy-M-d");
+            now = DateTime.Now.ToString("yyyy-MM-dd");
         }
     }
 }

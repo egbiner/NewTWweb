@@ -5,17 +5,20 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset="utf-8" />
 		<meta charset="utf-8">
-		<title>大活表格</title>
+		<title>申请表</title>
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <link href="css/new_file.css" rel="stylesheet" />
-        <link href="css/layer.css" rel="stylesheet" />
+<%--        <link href="css/layer.css" rel="stylesheet" />--%>
+        <script src="js/laydate/laydate.js"></script>
         <script src="js/layui/layui.js"></script>
         <script src="js/lq.datetimepick.js"></script>
         <script src="js/selectUi.js"></script>
         <script type="text/javascript">
-            layui.use('layer', function () {
-                var $ = layui.jquery, layer = layui.layer;
+            layui.use(['layer','laydate'], function () {
+                var $ = layui.jquery,
+                    layer = layui.layer
+                    ,laydate = layui.laydate;
 
             window.sub = function(){
                     layer.open({
@@ -115,7 +118,7 @@
                                 <th width="10%"><span>日期：</span></th>
                                 <td width="100px">
                                     <div class="form-group float-left w140" style="width: 100px;">
-                                        <input type="text" name="date" id="datetimepicker3" class="form-control" value="<%=now %>" autocomplete="off"/>
+                                        <input type="text" readonly="readonly" name="date" id="datetimepicker3" class="form-control" value="<%=now %>" autocomplete="off"/>
                                     </div>
                                 </td>
                                 <th width="7.5%"><span></span></th>
@@ -371,20 +374,27 @@
         });
 
 
-        $("#datetimepicker3").on("click", function (e) {
-            e.stopPropagation();
-            $(this).lqdatetimepicker({
-                css: 'datetime-day',
-                offset: {
-                    left: -70, //向左偏移的位置
-                    top: 10 //向上偏移的位置
-                },
-                dateType: 'D',
-                selectback: function () {
+        //$("#datetimepicker3").on("click", function (e) {
+        //    e.stopPropagation();
+        //    $(this).lqdatetimepicker({
+        //        css: 'datetime-day',
+        //        offset: {
+        //            left: -70, 
+        //            top: 10 
+        //        },
+        //        dateType: 'D',
+        //        selectback: function () {
 
-                }
+        //        }
+        //    });
+
+        //});
+
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#datetimepicker3' 
             });
-
         });
 
         $("#ac_start_time").on("click", function (e) {
