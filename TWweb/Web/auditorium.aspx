@@ -23,7 +23,7 @@
                     if ($(this).attr('id') == 4) {
                         document.getElementById("iframe1").src = "apply_search.aspx";
                     } else if ($(this).attr('id') == 3) {
-                        notice();
+                        //notice();
                         document.getElementById("iframe1").src = "applyform.aspx";
                     } else if ($(this).attr('id') == 2) {
                         document.getElementById("iframe1").src = "activities_history.aspx";

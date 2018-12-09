@@ -59,6 +59,8 @@ namespace TWweb.Web.ashx
                 ac_start_time = context.Request["ac_start_time"];
                 ac_end_time = context.Request["ac_end_time"];
 
+                //day = use_time_start.ToString("yyyy-MM-dd");
+
 
                 if (activity.Contains("_"))
                 {
@@ -102,6 +104,7 @@ namespace TWweb.Web.ashx
         //判断
         public int check()
         {
+            //注意day的格式  2018-12-01   0也是需要的  可以改进
             DataTable table = SqlHelper.ExecuteDataTable("select * from auditorium where status != '2' and  day=@day", new SqlParameter("@day", day));
             if (table.Rows.Count == 0)
             {
