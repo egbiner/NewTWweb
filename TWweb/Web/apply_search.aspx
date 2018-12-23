@@ -7,13 +7,15 @@
 <title>演艺厅申请</title>
 <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/layui/layui.js"></script>
+<%--<link rel="stylesheet" type="text/css" href="js/layui/css/layui.css" />--%>
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
 <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
 <script type="text/javascript" src="js/jquery.ui.datepicker-zh-CN.js"></script><!--星期中文化-->                                                                               
 <script type="text/javascript" src="js/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="js/jquery-ui-timepicker-zh-CN.js"></script><!--文字中文化--> 
 
-<script>
+<script type="text/javascript">
 $(function(){
 		   $("div").click(function(){
 		   $(this).addClass("select");		
@@ -21,6 +23,16 @@ $(function(){
 })
 </script>
 <link href="css/zzsc.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+    .cancel-btn{
+        width:40%;
+        height:30px;
+        margin-left:0px;
+    }
+    .cancel-btn:hover{
+        cursor:pointer;
+    }
+</style>
 </head>
 <body>
     <br />
@@ -57,22 +69,58 @@ $(function(){
             window.open('applyform_modle.aspx?id='+id, 'new', 'location=no, toolbar=no,height=770,width=720');
             return false;
         }
-        function search() {
-            $.ajax({
-                type: "POST",
-                url: 'ashx/searchResult.ashx',
-                data: { "recode": $("#recode").val() },
-                dataType: 'html',
-                success: function (data) { 
-                    var objData = eval('(' + data + ')');
-                    $("#intext").empty().append($(objData.result));
-                    $("#file_download").empty().append(objData.fileName).attr("href", objData.url);
-                },
-                error: function () {
-                    alert("500 服务器返回错误")
-                }
-        })
-        }
+
+        layui.use('layer', function () {
+            var $ = layui.jquery, layer = layui.layer;
+
+            window.search = function() {
+                $.ajax({
+                    type: "POST",
+                    url: 'ashx/searchResult.ashx',
+                    data: { "recode": $("#recode").val() },
+                    dataType: 'html',
+                    success: function (data) {
+                        var objData = eval('(' + data + ')');
+                        $("#intext").empty().append($(objData.result));
+                        if (objData.status == 1 || objData.status == 0 ) {
+                            $("#intext").append("<input type='button' onclick='cancel()' class='send cancel-btn' value='取消申请' />");
+                            $("#file_download").empty().append(objData.fileName).attr("href", objData.url);
+                        }
+                    },
+                    error: function () {
+                        alert("500 服务器返回错误")
+                    }
+                })
+            }
+            window.cancel = function () {
+                layer.confirm('是否要取消申请？', {
+                    btn: ['确定', '点错了'],
+                    shade: 0
+                }, function () {
+                    $.ajax({
+                        type: "POST",
+                        url: 'ashx/auditorium_cancel.ashx',
+                        data: { "recode": $("#recode").val() },
+                        dataType: 'html',
+                        success: function (data) {
+                            var objData = eval("(" + data + ")");
+                            layer.msg(objData.result, { icon: 1 });
+                            //alert(objData.result);
+                            if (objData.status == 1) {
+                                search();
+                            }
+                        },
+                        error: function () {
+                            alert("500 服务器返回错误")
+                        }
+                    })
+
+                }, function () {
+
+                });
+            }
+        });
+
     </script>
 </body>
 </html>

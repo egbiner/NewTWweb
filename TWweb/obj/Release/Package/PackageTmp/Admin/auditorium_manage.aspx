@@ -25,6 +25,7 @@
                     <option value="0">待审核</option>
                     <option value="1">已通过</option>
                     <option value="2">已拒绝</option>
+                    <option value="3">已取消</option>
                 </select>
                  </div>
         </div>
@@ -53,6 +54,8 @@
                 <td style="color:blue">待处理</td>
             <%} else if (int.Parse(alt.status.ToString()) == 2) { %>
                 <td style="color:red">已拒绝</td>
+            <%}else if (int.Parse(alt.status.ToString()) == 3) { %>
+                <td style="color:orangered">已取消</td>
             <%} else{%>
                 <td style="color:green">已通过</td>
             <%} %>

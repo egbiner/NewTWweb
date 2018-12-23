@@ -108,13 +108,14 @@ input.btn {
 .ui-timepicker-rtl dl dt{ float: right; clear: right; }
 .ui-timepicker-rtl dl dd { margin: 0 45% 10px 10px; }
 
-.send{
-	width: 50%;
-	height: 38px;	
-	margin:  0px 0px 10px 150px;
-	border-radius: 8px;
-	
+.send {
+    width: 40%;
+    height: 38px;
+    margin: 0px 0px 10px 185px;
+    border-radius: 3px;
+    font-size:14px;
 }
 .send:hover{
-	background-color: #F8701E;
+	background-color: #f6e99f;
+    cursor:pointer;
 }

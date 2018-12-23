@@ -60,12 +60,17 @@ namespace TWweb.Web.ashx
                 {
                     redata = tips + "<h1 style='text-align:center;color:red;'> 申请失败</h1><p>" + ((DateTime)dt.Rows[0]["handle_time"]).ToString("F") + "</p><p>失败原因:" + dt.Rows[0]["reason"] + "</p>";
                 }
+                else if (status == 3)
+                {
+                    redata = "<h1 style='text-align:center;color:red;'> 已取消</h1><p>" + ((DateTime)dt.Rows[0]["update_time"]).ToString("F") + "</p>";
+                }
                 else
                     redata = "<h1 style='text-align:center;color:blue;'>申请中</h1>";
 
                 JavaScriptSerializer json = new JavaScriptSerializer();
                 Dictionary<string, object> dictionaty = new Dictionary<string, object>();
                 dictionaty.Add("result", redata);
+                dictionaty.Add("status", status);
                 dictionaty.Add("fileName", filename);
                 dictionaty.Add("url", url);
                 string jsonStr = json.Serialize(dictionaty);
@@ -77,6 +82,7 @@ namespace TWweb.Web.ashx
                 JavaScriptSerializer json = new JavaScriptSerializer();
                 Dictionary<string, object> dictionaty = new Dictionary<string, object>();
                 dictionaty.Add("result", "<h1 style='text-align:center;'>发生未知错误!</h1>");
+                dictionaty.Add("status", 3);
                 string jsonStr = json.Serialize(dictionaty);
                 context.Response.Write(jsonStr);
             }
